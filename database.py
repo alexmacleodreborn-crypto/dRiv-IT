@@ -2,6 +2,7 @@ import sqlite3
 
 DB_NAME = "drivit.db"
 
+
 def get_connection():
     return sqlite3.connect(DB_NAME, check_same_thread=False)
 
@@ -23,7 +24,7 @@ def create_tables():
     )
     """)
 
-    # COMPANIES
+    # COMPANIES (NEXT STEP READY)
     c.execute("""
     CREATE TABLE IF NOT EXISTS companies (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
