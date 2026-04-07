@@ -17,41 +17,84 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -------------------------------
-# BRAND STYLING
+# DARK THEME STYLING
 # -------------------------------
 st.markdown("""
 <style>
 
-/* Background */
+/* =========================
+   BASE
+========================= */
 .stApp {
-    background-color: #F3F4F6;
+    background-color: #0B1E36;
 }
 
-/* Text */
-html, body {
+html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
-    color: #1C1C1E;
+    color: #F3F4F6;
 }
 
-/* Headers */
+/* =========================
+   HEADERS
+========================= */
 h1, h2, h3 {
-    color: #0B1E36;
+    color: #FFFFFF;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
 .stButton > button {
     background-color: #FF6600;
     color: white;
     border-radius: 10px;
     font-weight: 600;
+    border: none;
 }
 .stButton > button:hover {
     background-color: #e65c00;
 }
 
-/* Inputs */
-input {
+/* =========================
+   INPUTS
+========================= */
+input, textarea {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+    border: 1px solid #2A75D3 !important;
     border-radius: 8px !important;
+}
+
+/* =========================
+   TABS
+========================= */
+button[data-baseweb="tab"] {
+    color: #F3F4F6;
+}
+
+button[aria-selected="true"] {
+    background-color: #2A75D3 !important;
+}
+
+/* =========================
+   STATUS
+========================= */
+.stSuccess {
+    color: #10B981;
+}
+
+/* =========================
+   LINKS
+========================= */
+a {
+    color: #2A75D3;
+}
+
+/* =========================
+   DIVIDER
+========================= */
+hr {
+    border: 1px solid #2A75D3;
 }
 
 </style>
@@ -91,7 +134,7 @@ def get_user_role(email):
 def login_page():
     st.markdown("""
     <h1 style='text-align:center; font-family: Exo 2;'>
-        <span style='color:#0B1E36;'>dRiv</span><span style='color:#FF6600;'>IT</span>
+        <span style='color:#FFFFFF;'>dRiv</span><span style='color:#FF6600;'>IT</span>
     </h1>
     <p style='text-align:center; color:#2A75D3;'>
         Fleet • Safety • Intelligence
@@ -137,7 +180,7 @@ def admin_dashboard():
     st.divider()
 
     st.subheader("System Overview")
-    st.write("• Companies (coming next)")
+    st.write("• Companies (next)")
     st.write("• Users")
     st.write("• Fleet Data")
 
