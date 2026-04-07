@@ -1,22 +1,39 @@
-import streamlit as st
-import bcrypt
+import sqlite3
+from database import get_connection
+import hashlib
 
-# TEMP in-memory store (replace with DB later)
-users = {}
 
 def hash_password(password):
-    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    return hashlib.sha256(password.encode()).hexdigest()
 
-def check_password(password, hashed):
-    return bcrypt.checkpw(password.encode(), hashed)
 
 def register_user(email, password):
-    if email in users:
+    conn = get_connection()
+    c = conn.cursor()
+
+    try:
+        c.execute(
+            "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
+            (email, hash_password(password), "staff"),
+        )
+        conn.commit()
+        return True
+    except:
         return False
-    users[email] = hash_password(password)
-    return True
+    finally:
+        conn.close()
+
 
 def login_user(email, password):
-    if email in users and check_password(password, users[email]):
-        return True
+    conn = get_connection()
+    c = conn.cursor()
+
+    c.execute("SELECT password FROM users WHERE email=?", (email,))
+    result = c.fetchone()
+
+    conn.close()
+
+    if result:
+        return hash_password(password) == result[0]
+
     return False
