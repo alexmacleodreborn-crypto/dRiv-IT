@@ -1,6 +1,5 @@
-import sqlite3
-from database import get_connection
 import hashlib
+from database import get_connection
 
 
 def hash_password(password):
