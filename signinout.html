@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dRiv.IT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-md p-8 bg-gray-800 rounded-2xl shadow-xl">
+
+    <!-- Logo / Title -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold">dRiv.IT</h1>
+      <p class="text-gray-400">Road Safety & Fleet Management</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex mb-6">
+      <button onclick="showTab('login')" id="loginTab" class="w-1/2 py-2 bg-blue-600 rounded-l-xl">Sign In</button>
+      <button onclick="showTab('register')" id="registerTab" class="w-1/2 py-2 bg-gray-700 rounded-r-xl">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <input type="email" placeholder="Email" class="w-full mb-3 p-2 rounded bg-gray-700" />
+      <input type="password" placeholder="Password" class="w-full mb-3 p-2 rounded bg-gray-700" />
+      <button onclick="login()" class="w-full py-2 bg-blue-600 rounded-xl">Sign In</button>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="hidden">
+      <input type="text" placeholder="Full Name" class="w-full mb-3 p-2 rounded bg-gray-700" />
+      <input type="email" placeholder="Email" class="w-full mb-3 p-2 rounded bg-gray-700" />
+      <input type="password" placeholder="Password" class="w-full mb-3 p-2 rounded bg-gray-700" />
+      <button onclick="register()" class="w-full py-2 bg-green-600 rounded-xl">Create Account</button>
+    </div>
+
+    <!-- Logout -->
+    <div id="logoutSection" class="hidden text-center">
+      <p class="mb-4">You are logged in</p>
+      <button onclick="logout()" class="w-full py-2 bg-red-600 rounded-xl">Logout</button>
+    </div>
+
+  </div>
+
+  <script>
+    let isLoggedIn = false;
+
+    function showTab(tab) {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.add('hidden');
+
+      document.getElementById('loginTab').classList.remove('bg-blue-600');
+      document.getElementById('registerTab').classList.remove('bg-green-600');
+
+      if (tab === 'login') {
+        document.getElementById('loginForm').classList.remove('hidden');
+        document.getElementById('loginTab').classList.add('bg-blue-600');
+      } else {
+        document.getElementById('registerForm').classList.remove('hidden');
+        document.getElementById('registerTab').classList.add('bg-green-600');
+      }
+    }
+
+    function login() {
+      isLoggedIn = true;
+      updateUI();
+      alert('Logged in (demo)');
+    }
+
+    function register() {
+      alert('Account created (demo)');
+      showTab('login');
+    }
+
+    function logout() {
+      isLoggedIn = false;
+      updateUI();
+    }
+
+    function updateUI() {
+      if (isLoggedIn) {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('logoutSection').classList.remove('hidden');
+      } else {
+        document.getElementById('logoutSection').classList.add('hidden');
+        showTab('login');
+      }
+    }
+
+    // Initialize
+    showTab('login');
+  </script>
+
+</body>
+</html>
